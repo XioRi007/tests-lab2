@@ -4,33 +4,22 @@ class Matrix extends Array {
 
     this.rows = rows;
     this.cols = cols;
+    this.length = rows;
 
-    if (typeof data === 'function') {
-      for (let i = 0; i < rows; i++) {
-        this[i] = new Array(cols);
+    for (let i = 0; i < rows; i++) {
+      this[i] = new Array(cols);
+      if (typeof data === 'function') {
         for (let j = 0; j < cols; j++) {
           this[i][j] = data(i, j);
         }
+      } else if (Array.isArray(data)) {
+        this[i] = Array.isArray(data[i]) ? data[i] : this[i].fill(0);
+      } else if (typeof data === 'number') {
+        this[i].fill(data);
+      } else if (typeof data === 'undefined' || data === null) {
+        this[i].fill(0);
       }
     }
-    if (Array.isArray(data)) {
-      for (let i = 0; i < rows; i++) {
-        this[i] = Array.isArray(data[i]) ? data[i] : new Array(cols).fill(0);
-      }
-    }
-
-    if (typeof data === 'number') {
-      for (let i = 0; i < rows; i++) {
-        this[i] = new Array(cols).fill(data);
-      }
-    }
-    if (typeof data === 'undefined' || data === null) {
-      for (let i = 0; i < rows; i++) {
-        this[i] = new Array(cols).fill(0);
-      }
-    }
-
-    this.length = this.rows;
   }
 
   add(other) {
