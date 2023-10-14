@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const Matrix = require('../src/matrix');
 
 describe('operations', function() {
   it('should add matrix', () => {

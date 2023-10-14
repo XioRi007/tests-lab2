@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const Matrix = require('../src/matrix');
 
 describe('creation', function() {
   it('should create a matrix with null data', function() {
